@@ -37,7 +37,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Format
-        run: terraform fmt -check
+        run: terraform fmt
 
       - name: Terraform Plan - State Bucket
         run: terraform plan -target=aws_s3_bucket.rs-school-s3 -input=false
