@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "rs-school-s3" {
-   bucket = var.bucket_name
-   acl = "private"  
+  bucket = var.bucket_name
+  acl    = "private"
 
-   versioning {
+  versioning {
     enabled = true
   }
 
