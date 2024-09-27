@@ -7,13 +7,15 @@ resource "aws_iam_role" "GithubActionsRole" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Federated" : "arn:aws:iam::012345678910:oidc-provider/token.actions.githubusercontent.com"
+          "Federated" : "arn:aws:iam::442042521792:oidc-provider/token.actions.githubusercontent.com"
         },
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
           "StringEquals" : {
-            "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com",
-            "token.actions.githubusercontent.com:sub" : "repo:liubov-js/rsschool-devops-course-tasks/*"
+            "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
+          },
+          "StringLike" : {
+            "token.actions.githubusercontent.com:sub" : "repo:liubov-js/rsschool-devops-course-tasks:*"
           }
         }
       }
