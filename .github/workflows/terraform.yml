@@ -34,7 +34,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Assume AWS Role using OIDC
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::442042521792:role/GithubActionsRole
           aws-region: us-east-1
@@ -63,7 +63,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Assume AWS Role using OIDC
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::442042521792:role/GithubActionsRole
           aws-region: us-east-1
