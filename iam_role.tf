@@ -2,16 +2,21 @@ resource "aws_iam_role" "GithubActionsRole" {
   name = "GithubActionsRole"
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
+    "Version": "2012-10-17",
+    "Statement": [
       {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "ec2.amazonaws.com"
+        "Effect": "Allow",
+        "Principal": {
+          "Federated": "arn:aws:iam::012345678910:oidc-provider/token.actions.githubusercontent.com"
+        },
+        "Action": "sts:AssumeRoleWithWebIdentity",
+        "Condition": {
+          "StringEquals": {
+            "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+            "token.actions.githubusercontent.com:sub": "repo:liubov-js/rsschool-devops-course-tasks/*"
+          }
         }
-      },
+      }
     ]
   })
 
