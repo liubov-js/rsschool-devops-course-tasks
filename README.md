@@ -12,7 +12,7 @@
 
 4. Create a bucket `rs-school-s3` via Terraform for Terraform states (watch `s3.tf` file).
 
-5. Create an IAM role `GithubActionsRole` for Github Actions using Terraform resource (watch `iam_role.tf` file).
+5. Create an IAM role `GithubActionsRole` for Github Actions using Terraform resource (watch `iam_role.tf` file). I use GitHub as an OpenID Connect (OIDC) identity provider (IdP).
 
 6. Configure an Identity Provider and Trust policies for Github Actions.
 
