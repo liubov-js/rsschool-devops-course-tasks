@@ -2,74 +2,74 @@ resource "aws_network_acl" "public_nacl" {
   vpc_id     = aws_vpc.main.id
   subnet_ids = aws_subnet.public_subnets[*].id
 
+  # Allow inbound HTTP
   ingress {
-    description = "Allow inbound HTTP"
-    protocol    = "tcp"
-    rule_no     = 100
-    action      = "allow"
-    cidr_block  = "0.0.0.0/0"
-    from_port   = 80
-    to_port     = 80
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 80
+    to_port    = 80
   }
 
+  # Allow inbound HTTPS
   ingress {
-    description = "Allow inbound HTTPS"
-    protocol    = "tcp"
-    rule_no     = 110
-    action      = "allow"
-    cidr_block  = "0.0.0.0/0"
-    from_port   = 443
-    to_port     = 443
+    protocol   = "tcp"
+    rule_no    = 110
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 443
+    to_port    = 443
   }
 
+  # Allow inbound SSH
   ingress {
-    description = "Allow inbound SSH"
-    protocol    = "tcp"
-    rule_no     = 120
-    action      = "allow"
-    cidr_block  = "0.0.0.0/0"
-    from_port   = 22
-    to_port     = 22
+    protocol   = "tcp"
+    rule_no    = 120
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 22
+    to_port    = 22
   }
 
+  # Allow inbound ephemeral ports
   ingress {
-    description = "Allow inbound ephemeral ports"
-    protocol    = "tcp"
-    rule_no     = 130
-    action      = "allow"
-    cidr_block  = "0.0.0.0/0"
-    from_port   = 1024
-    to_port     = 65535
+    protocol   = "tcp"
+    rule_no    = 130
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 1024
+    to_port    = 65535
   }
 
+  # Allow inbound ICMP (ping) traffic
   ingress {
-    description = "Allow inbound ICMP (ping) traffic"
-    protocol    = "icmp"
-    rule_no     = 140
-    action      = "allow"
-    cidr_block  = "0.0.0.0/0"
-    from_port   = 8
-    to_port     = 0
+    protocol   = "icmp"
+    rule_no    = 140
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 8
+    to_port    = 0
   }
 
+  # Allow all outbound traffic
   egress {
-    description = "Allow all outbound traffic"
-    protocol    = "-1"
-    rule_no     = 100
-    action      = "allow"
-    cidr_block  = "0.0.0.0/0"
-    from_port   = 0
-    to_port     = 0
+    protocol   = "-1"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 
+  # Allow outbound traffic to a private subnet
   egress {
-    description = "Allow outbound traffic to a private subnet"
-    protocol    = "-1"
-    rule_no     = 110
-    action      = "allow"
-    cidr_block  = aws_vpc.main.cidr_block
-    from_port   = 0
-    to_port     = 0
+    protocol   = "-1"
+    rule_no    = 110
+    action     = "allow"
+    cidr_block = aws_vpc.main.cidr_block
+    from_port  = 0
+    to_port    = 0
   }
 
   tags = {
@@ -81,34 +81,34 @@ resource "aws_network_acl" "private_nacl" {
   vpc_id     = aws_vpc.main.id
   subnet_ids = aws_subnet.private_subnets[*].id
 
+  # Allow inbound traffic from public subnets
   ingress {
-    description = "Allow inbound traffic from public subnets"
-    protocol    = "-1"
-    rule_no     = 100
-    action      = "allow"
-    cidr_block  = aws_vpc.main.cidr_block
-    from_port   = 0
-    to_port     = 0
+    protocol   = "-1"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = aws_vpc.main.cidr_block
+    from_port  = 0
+    to_port    = 0
   }
 
+  # Allow inbound ephemeral ports
   ingress {
-    description = "Allow inbound ephemeral ports"
-    protocol    = "tcp"
-    rule_no     = 110
-    action      = "allow"
-    cidr_block  = "0.0.0.0/0"
-    from_port   = 1024
-    to_port     = 65535
+    protocol   = "tcp"
+    rule_no    = 110
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 1024
+    to_port    = 65535
   }
 
+  # Allow all outbound traffic
   egress {
-    description = "Allow all outbound traffic"
-    protocol    = "-1"
-    rule_no     = 100
-    action      = "allow"
-    cidr_block  = "0.0.0.0/0"
-    from_port   = 0
-    to_port     = 0
+    protocol   = "-1"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 
   tags = {
